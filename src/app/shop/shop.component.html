@@ -33,6 +33,7 @@
                         #search placeholder="Search">
                     <button class="btn btn-outline-primary my-2" (click)='onSearch()'>Search</button>
                     <button class="btn btn-outline-success my-2 ml-2" (click)='onReset()'>Reset</button>
+                    <button class="btn btn-outline-success my-2 ml-2" (click)='openModal()'>Add</button>
                 </div>
             </div>
 
@@ -47,5 +48,62 @@
                     [pageSize]="shopParams.pageSize"></app-pager>
             </div>
         </section>
+    </div>
+</div>
+
+
+
+
+
+<div id="myModal" class="myModal">
+    <div class="modalBox">
+        <!-- <i (click)="closeModal()" id="closeModal" class="fas fa-times"></i> -->
+        <i (click)="closeModal()" id="closeModal" class="far fa-window-close"></i>
+        <!-- <i class=""></i> -->
+
+
+        <div class="row">
+
+            <div class="col-8 mt-2">
+
+                <form [formGroup]="productData" action="">
+                    <label for="">name</label>
+                    <input formControlName="name" type="text" class="form-control" name="" id="">
+
+                    <label for="">description</label>
+                    <input formControlName="description" type="text" class="form-control" name="" id="">
+
+
+                    <label for="">price</label>
+                    <input formControlName="price" type="text" class="form-control" name="" id="">
+
+
+                    <label for="">rating</label>
+                    <input formControlName="rating" type="text" class="form-control" name="" id="">
+
+                    <label for="">Available Quantity</label>
+                    <input formControlName="availableQuantity" type="text" class="form-control" name="" id="">
+
+                    <label for=""> productType</label>
+                    <input formControlName="productType" type="text" class="form-control" name="" id="">
+                    <label for=""> limit </label>
+                    <input formControlName="limit" type="text" class="form-control" name="" id="">
+
+                    <label for=""> productBrand </label>
+                    <input formControlName="productBrand" type="text" class="form-control" name="" id="">
+
+
+
+                    <label for="">image </label>
+                    <input (input)='onUpload($event)' name="photofileName" class="form-control w-100" type="file">
+                </form>
+
+
+            </div>
+
+        </div>
+        <!-- routerLink="" -->
+        <button id="modalAcceptBtn" class="btn"> Add </button>
+
     </div>
 </div>

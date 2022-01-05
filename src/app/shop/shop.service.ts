@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
 import { IProduct } from '../shared/models/product';
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,24 @@ import { environment } from 'src/environments/environment';
 export class ShopService {
   baseUrl = environment.baseUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
+  addProduct(data, image): Observable<any> {
+    const product = {
+      // id: Number(data.id),
+      name: data.name,
+      description: data.description,
+      price: Number(data.price),
+      rating: Number(data.rating),
+      availableQuantity: data.availableQuantity,
+      limit: Number(data.limit),
+      pictureUrl: data.pictureUrl,
+      productType: data.productType,
+      productBrand: data.productBrand,
+
+    }
+    return this.http.post(this.baseUrl + 'products', product)
+  }
   getProducts(shopParams: ShopParams) {
     let params = new HttpParams();
     if (shopParams.brandId !== 0) {
@@ -53,7 +70,7 @@ export class ShopService {
   }
   postProduct(product: IProduct) {
     return this.http.get<IProduct[]>(this.baseUrl + 'Products/CreateProduct/');
-  } 
+  }
   // create(genre: genreCreationDto){
   //   return this.http.post(this.apiurl, genre);
   // }

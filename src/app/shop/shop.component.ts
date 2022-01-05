@@ -4,6 +4,7 @@ import { IProduct } from '../shared/models/product';
 import { IBrand } from '../shared/models/brand';
 import { IType } from '../shared/models/productType';
 import { ShopParams } from '../shared/models/shopParams';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-shop',
@@ -25,12 +26,57 @@ export class ShopComponent implements OnInit {
 
   constructor(private shopService: ShopService) {}
 
+  // id: number;
+  name: string;
+  description: string;
+  price: number;
+  rating: number;
+  availableQuantity: number;
+  limit: number;
+  pictureUrl: string;
+  productType: string;
+  productBrand: string;
+  selectedImage:any = null;
+
+
+  productData = new FormGroup({
+    // id : new FormControl("" ,[Validators.required]) , 
+    name : new FormControl("" ,[Validators.required]) , 
+    description : new FormControl("" ,[Validators.required]) , 
+    price : new FormControl("" ,[Validators.required]) , 
+    rating : new FormControl("" ,[Validators.required]) , 
+    availableQuantity : new FormControl("" ,[Validators.required]) , 
+    limit : new FormControl("" ,[Validators.required]) , 
+    // pictureUrl : new FormControl("" ,[Validators.required]) , 
+    productType : new FormControl("" ,[Validators.required]) , 
+    productBrand : new FormControl("" ,[Validators.required]) , 
+  })
+
+ 
   ngOnInit(): void {
     this.getProducts();
     this.getBrands();
     this.getTypes();
   }
 
+  onAdd(){
+console.log(this.productData.value);
+
+
+  }
+  
+  closeModal(){
+    (document.getElementById("myModal") as HTMLElement).style.display ="none";
+  }
+ 
+  openModal(){
+    (document.getElementById("myModal") as HTMLElement).style.display ="block";
+  }
+
+  onUpload(event: any) {
+    this.selectedImage = <File>event.target.files[0]
+    console.log(this.selectedImage);
+  }
   getProducts() {
     this.shopService.getProducts(this.shopParams).subscribe(
       (res) => {

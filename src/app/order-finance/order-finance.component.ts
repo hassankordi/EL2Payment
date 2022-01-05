@@ -13,9 +13,9 @@ export class OrderFinanceComponent implements OnInit {
   selectedImage: any = null;
 
   buyerEmail: "string";
-  orderDate: "asfasfsaf";
+  orderDate: "";
   deliveryMethod: "string";
-  shippingPrice: 0;
+  shippingPrice: 0
   subTotal: 0;
   total: 0;
   status: "string";
