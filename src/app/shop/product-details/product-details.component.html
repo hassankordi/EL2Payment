@@ -1,0 +1,30 @@
+<div class="container mt-5">
+    <div class="row" *ngIf="product">
+        <div class="col-6">
+            <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="img-fluid w-100"><img>
+        </div>
+        <div class="col-6">
+            <h3>{{product.name}}</h3>
+            <p style="font-size: 1.5em;">{{product.price|currency}}</p>
+            <div class="d-flex justify-content-start align-items-center">
+                <i (click)="decrementQuantity()" class="fa fa-minus-circle text-warning mr-2"
+                    style="cursor: pointer; font-size: 2em;"></i>
+                <span class="font-weight-bold" style="font-size: 1.5em;">{{quantity}}</span>
+                <i (click)="incrementQuantity()" class="fa fa-plus-circle text-warning mx-2"
+                    style="cursor: pointer; font-size: 2em;"></i>
+                <button [disabled]="product.availableQuantity<1" (click)="addItemToBasket()"
+                    class="btn btn-primary btn-lg ml-4">Add to
+                    Cart</button>
+            </div>
+            <h6 class="mt-2" *ngIf="product.availableQuantity>0 && quantity==product.limit">Max {{product.limit}} quantities of this
+                product can be ordered at once</h6>
+            <h4 *ngIf="product.availableQuantity<1" style="color: #eb4141;">Sold Out</h4>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12 ml-3">
+                <h4>Description</h4>
+                <p>{{product.description}}</p>
+            </div>
+        </div>
+    </div>
+</div>

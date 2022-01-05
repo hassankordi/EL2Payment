@@ -1,0 +1,99 @@
+ <div class="conatiner"style="margin:40px">
+
+<!-- <button type="button" 
+class="btn btn-primary m-2 float-end"
+data-bs-toggle="model"
+data-bs-target="#myModal"
+(click)="addClick()">
+
+Add Type
+</button> -->
+<button mat-flat-button class="btn btn-danger"  color="" (click)="openModal()" >
+    Add Attach
+</button> 
+
+<table class="table table-strip">
+    <thead>
+        <th>
+            ProductType Id
+        </th> 
+        <th>
+                 ProductType Name
+        </th>  
+        <th>
+            option
+        </th>
+    
+    </thead> 
+    <tbody>
+       <tr *ngFor="let pro of prodctType">
+           <td >{{pro.id}}</td>
+           <td >{{pro.name}}</td> 
+            <!-- <td>
+                <button type="button" class="btn btn-light mr-1">Edit</button> 
+                <button type="button" class="btn btn-light mr-1">Delete</button> 
+            </td> -->
+
+       </tr>
+    </tbody>
+</table> 
+
+
+</div>
+<div id="myModal" class="myModal">
+    <div class="modalBox">
+        <!-- <i (click)="closeModal()" id="closeModal" class="fas fa-times"></i> -->
+        <i (click)="closeModal()" id="closeModal" class="far fa-window-close"></i>
+        <!-- <i class=""></i> -->
+        
+       
+        <div class="row">
+            <div class="col-12 mt-5">
+               
+                <app-input-text [label]="'Type Name'" formControlName="Name"></app-input-text>
+              
+
+            </div>
+         
+        </div>
+        <!-- routerLink="" --> 
+        <button type="button" (click)="createClick()"
+        *ngIf="Id==0"class="btn btn-primary">
+    Create
+    </button>
+        <!-- <button  id="modalAcceptBtn" class="btn"> Add </button> -->
+
+    </div>
+</div>
+<!-- 
+<div class="model fade" id="exampleModel" tabindes="-1" aria-label="exampleModalLabel" 
+aria-hidden="true">
+<div class="model-dialog model-lg model-dialog-centered">
+<div class="model-content">
+    <div class="model-header">
+        <h5 class="model-title" id="exampleModalLabel">{{modalTitle}}</h5> 
+        <button type="button" class="btn-close" data-bs-dismiss="model"
+        aria-label="Close"></button>
+    </div> 
+    <div class="model-body">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Type name</span> 
+             <input type="text" class="form-control"(input)="Name"/>
+        </div> 
+        <button type="button" (click)="createClick()"
+        *ngIf="Id==0"class="btn btn-primary">
+    Create
+    </button>
+
+    <!-- <button type="button" (click)="updateClick()"
+        *ngIf="Id==0"class="btn btn-primary">
+    Update
+    </button> -->
+    <!-- </div>
+</div>
+
+
+
+</div>
+
+</div> --> -->
