@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,12 +16,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { OrdersComponent } from './orders/orders.component';
-import { GetAllFinanceComponent } from './finace/get-all-finance/get-all-finance.component';
+
 import { OrderFinanceComponent } from './order-finance/order-finance.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [AppComponent, OrdersComponent, GetAllFinanceComponent, OrderFinanceComponent],
+  declarations: [AppComponent, OrdersComponent, OrderFinanceComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,6 +33,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    MatDialogModule
     
   ],
   providers: [

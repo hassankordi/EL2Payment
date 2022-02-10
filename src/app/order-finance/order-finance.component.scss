@@ -19,8 +19,8 @@
       background-color: #fff;
       border-radius: 8px;
       position: relative;
-      width: 500px;
-      min-height: 70vh;
+      width: 300px;
+      min-height: 50vh;
       top: 25px;
       left: 50%;
       transform: translateX(-50%);
@@ -41,28 +41,39 @@
           height: 100% !important;
       }
   
-      #closeModal {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        color: #28a745;
-        cursor: pointer;
-      }
      
-      #modalAcceptBtn {
-        position: absolute;
-        bottom: 0px;
-        left: 50%;
-        //    right: 50%;
-        transform: translate(-50%, -50%);
-        // background-image: linear-gradient(#fed94c, #f3c221);
-        background-color: #28a745;
-        padding: 6px 44px;
-        font-size: 20px;
-        font-weight: 700;
-        border-radius: 20px;
-      }
+     
+      // #modalCancelBtn{
+
+      // }
+      // #modalAcceptBtn {
+      //   position: absolute;
+      //   bottom: 0px;
+      //   left: 50%;
+      //   //    right: 50%;
+      //   transform: translate(-50%, -50%);
+      //   // background-image: linear-gradient(#fed94c, #f3c221);
+      //   background-color: #28a745;
+      //   padding: 6px 44px;
+      //   font-size: 20px;
+      //   font-weight: 700;
+      //   border-radius: 20px;
+      // }
       
+    }
+    #btnsRow{
+    
+     position: absolute;
+     bottom: 50px;
+     width: 100%;
+     .row{
+      display: flex;
+      justify-content: space-around;
+    
+      width: 100%;
+
+     }
+     
     }
   }
   

@@ -4,33 +4,47 @@
             <table class="table table-hover" style="cursor: pointer;">
                 <thead class="thead-light">
                     <tr>
-                        <th>Order</th>
+                        <th>Buyer Email</th> 
+                        <th>Product Name</th> 
+
+                        
+                        <th>Suplier</th>  
+                        <th>Description</th>
                         <th>Date</th>
                         <th>Total</th>
-                        <th>Status</th> 
+        
+                        <th>Action</th> 
+
                         <th> </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let order of orders">
-                        <th><a  routerLink="/orders/{{order.id}}"> {{order.buyerEmail}}</a></th>
+                    <!-- routerLink="/orders/{{order.id}}" -->
+                    <tr *ngFor="let order of orders" >
+                        <th> <a  routerLink="/orders/{{order.id}}"> {{order.buyerEmail}}</a></th> 
+                        <td>{{order.orderItems[0].itemOrdered.productName}}</td> 
+                        <td>{{order.orderItems[0].itemOrdered.supplier}}</td> 
+                        <th>{{order.orderItems[0].itemOrdered.description}}</th>
+                        
+
                         <td>{{order.orderDate | date: 'medium'}}</td>
+
                         <td>{{order.subTotal | currency}}</td>
                         <td >
-                            <a routerLink=""
-                            mat-flat-button   class="btn btn-danger"  color="primary"
-                            
-                            >Reject </a> 
-                            <button mat-flat-button  class="btn btn-success" >
-                                Pass
+                            <a
+                            mat-flat-button  (click)="Reject(order.id)"  class="btn btn-danger"  color="primary"
+
+                            >Reject </a>
+                            <button mat-flat-button (click)="pass(order.id)"  class="btn btn-success" >
+                                Accept
                             </button>
                         </td>
-                    </tr>  
-                   
+                    </tr>
+
                 </tbody>
             </table>
         </div>
     </div>
-</div> 
+</div>
 
 

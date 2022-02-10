@@ -17,7 +17,7 @@
       text-align: center;
       background-color: #efefef;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 20px;
       position: relative;
       width: 500px;
       min-height: 70vh;
@@ -44,23 +44,44 @@
         position: absolute;
         right: 15px;
         top: 15px;
-        color: #28a745;
+        color: #f30e0e;
         cursor: pointer;
       }
      
       #modalAcceptBtn {
-        position: absolute;
+        position: fixed;
         bottom: 20px;
         left: 50%;
         //    right: 50%;
         transform: translate(-50%, -50%);
-        // background-image: linear-gradient(#fed94c, #f3c221);
+         //background-image: linear-gradient(#fed94c, #f3c221);
         background-color: #28a745;
         padding: 6px 44px;
         font-size: 20px;
         font-weight: 700;
         border-radius: 20px;
-      }
+      } 
+      .list-group-item {
+        cursor: pointer;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.1em;
+    
+        &:focus{
+            outline: none;
+        }
+    
+        &:active{
+           border-radius: 10px;
+        }
+    
+        &:not(.active):hover{
+            color: #fff;
+            background-color: #e95620c2;
+            border-radius: 10px;
+        }
+    
       
     }
-  }
+  } 
+}

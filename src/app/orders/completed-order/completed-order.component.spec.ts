@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GetAllFinanceComponent } from './get-all-finance.component';
+import { CompletedOrderComponent } from './completed-order.component';
 
-describe('GetAllFinanceComponent', () => {
-  let component: GetAllFinanceComponent;
-  let fixture: ComponentFixture<GetAllFinanceComponent>;
+describe('CompletedOrderComponent', () => {
+  let component: CompletedOrderComponent;
+  let fixture: ComponentFixture<CompletedOrderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GetAllFinanceComponent ]
+      declarations: [ CompletedOrderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GetAllFinanceComponent);
+    fixture = TestBed.createComponent(CompletedOrderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -23,3 +23,4 @@ describe('GetAllFinanceComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

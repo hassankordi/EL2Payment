@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+
 import { BehaviorSubject, ReplaySubject, of } from 'rxjs';
 import { IUser } from '../shared/models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { IAddress } from '../shared/models/address';
+import { environment } from 'src/environments/environment';
+
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -75,7 +79,7 @@ export class AccountService {
       this.baseUrl + 'account/updateuser',
       address
     );
-  } 
+  }
   getRole():string{
     return 'admin'
   }

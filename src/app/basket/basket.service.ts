@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+
 import { BehaviorSubject } from 'rxjs';
 import {
   IBasket,
@@ -11,6 +11,12 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { IProduct } from '../shared/models/product';
 import { IDeliveryMethod } from '../shared/models/deliveryMethod';
+import { environment } from 'src/environments/environment';
+
+
+
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -25,30 +31,40 @@ export class BasketService {
 
   constructor(private http: HttpClient) {}
 
+  createPaymentIntent() {
+    return this.http.post(this.baseUrl + 'payments/' + this.getCurrentBasketValue().id, {})
+      .pipe(
+        map((basket: IBasket) => {
+          this.basketSource.next(basket);
+        })
+      );
+  }
   setShippingPrice(deliveryMethod: IDeliveryMethod) {
-    this.shipping = deliveryMethod.price;
+   this.shipping = deliveryMethod.price;
+    const basket = this.getCurrentBasketValue();
+    basket.deliveryMethodId = deliveryMethod.id;
+    basket.shippingPrice = deliveryMethod.price;
     this.calculateTotals();
+    this.setBasket(basket);
   }
 
   getBasket(id: string) {
     return this.http.get(this.baseUrl + 'basket?id=' + id).pipe(
       map((basket: IBasket) => {
         this.basketSource.next(basket);
+        this.shipping = basket.shippingPrice;
         this.calculateTotals();
       })
     );
   }
 
   setBasket(basket: IBasket) {
-    return this.http.post(this.baseUrl + 'basket', basket).subscribe(
-      (res: IBasket) => {
-        this.basketSource.next(res);
-        this.calculateTotals();
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    return this.http.post(this.baseUrl + 'basket', basket).subscribe((response: IBasket) => {
+      this.basketSource.next(response);
+      this.calculateTotals();
+    }, error => {
+      console.log(error);
+    });
   }
 
   getCurrentBasketValue() {
@@ -56,11 +72,11 @@ export class BasketService {
   }
 
   addItemToBasket(item: IProduct, quantity = 1) {
-    const itemToAdd: IBasketItem = this.mapProductItemToBasketItem(
-      item,
-      quantity
-    );
-    const basket = this.getCurrentBasketValue() ?? this.createBasket();
+    const itemToAdd: IBasketItem = this.mapProductItemToBasketItem(item, quantity);
+    let basket = this.getCurrentBasketValue();
+    if (basket === null) {
+      basket = this.createBasket();
+    }
     basket.items = this.addOrUpdateItem(basket.items, itemToAdd, quantity);
     this.setBasket(basket);
   }

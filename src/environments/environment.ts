@@ -4,11 +4,11 @@
 
 export const environment = {
   production: false,
-  // baseUrl: 'https://localhost:44353/api/', 
-  // PhotoUrl:'https://localhost:44353/api/api/Financ/SaveFile',  
+baseUrl: 'https://localhost:44353/api/',
+  //PhotoUrl:'https://localhost:44353/api/api/Financ/SaveFile',
 
-  baseUrl: 'http://192.168.1.51/EL2/api/', 
-  PhotoUrl:'http://192.168.1.51/EL2/api/Financ/SaveFile',  
+// baseUrl: 'http://192.168.1.51/EL2/api/',
+// PhotoUrl:'http://192.168.1.51/EL2/api/Financ/SaveFile',
 };
 
 /*

@@ -4,30 +4,46 @@
             <table class="table table-hover" style="cursor: pointer;">
                 <thead class="thead-light">
                     <tr>
-                        <th>Order</th>
+                        <th>Buyer Email</th>
+                        <th>Product Name</th>
+
+                        <th>Supplier</th>
+                        <th>Description</th>
                         <th>Date</th>
                         <th>Total</th>
-                        <th>Action</th> 
+                        <th>Action</th>
                         <th> </th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- routerLink="/orders/{{order.id}}" -->
                     <tr *ngFor="let order of orders" >
-                        <th> <a  routerLink="/orders/{{order.id}}"> {{order.buyerEmail}}</a></th>
+                        <th>  {{order.buyerEmail}}</th>
+
+                        <td>{{order.orderItems[0].itemOrdered.productName}}</td>
+                        <!-- <td>{{order.orderDate | date: 'medium'}}</td>
+
+                        <td>{{order.subTotal | currency}}</td> -->
+
+                     <td>{{order.orderItems[0].itemOrdered.supplier}}</td>
+                        <th>{{order.orderItems[0].itemOrdered.description}}</th>
+
+                         <!-- <td>{{order.orderItems[0]}}</td> -->
+                         <!-- <td>{{order.orderItems[0].id}}</td> -->
                         <td>{{order.orderDate | date: 'medium'}}</td>
-                        <td>{{order.subTotal | currency}}</td>
+
+                        <td>{{order.subTotal | currency }}</td>
                         <td >
-                           
-                            <button mat-flat-button class="btn btn-danger"  color="" (click)="openModal()" >
+
+                            <button mat-flat-button class="btn btn-danger"  color="" (click)="openModal(order.id)" >
                                 Add Attach
-                            </button> 
-                            <button mat-flat-button class="btn btn-primary" >
-                                Done
                             </button>
+                            <!-- <button mat-flat-button class="btn btn-primary" >
+                                Done
+                            </button> -->
                         </td>
-                    </tr>  
-                   
+                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -38,37 +54,34 @@
 
 
 
-<div id="myModal" class="myModal">
+<div id="myModal" class="myModal" *ngIf="closeDialog == true">
     <div class="modalBox">
         <!-- <i (click)="closeModal()" id="closeModal" class="fas fa-times"></i> -->
-        <i (click)="closeModal()" id="closeModal" class="far fa-window-close"></i>
+        <!-- <i  id="closeModal" class="far fa-window-close"></i> -->
         <!-- <i class=""></i> -->
-        
-       
-        <div class="row"> 
-            <div class="col-8 mt-2">
-               
-                <label for="">buyer </label>
-                <input type="text" [(ngModel)]="buyerEmail" class="form-control w-100" >
-            
-            </div>
-            <div class="col-8 mt-2">
-               
-                <label for="">total Mn </label>
-                <input type="text" [(ngModel)]="total" class="form-control w-100" >
-            
-            </div>
-            <div class="col-8 mt-2">
-               
+
+
+        <div class="row align-content-center">
+
+
+            <div class="col-12 mt-2">
+
                 <label for="">image </label>
-                <input (input)='editClick($event)' name="photofileName" class="form-control w-100" type="file">
-              
+                <input (input)='onUpload($event)' name="photofileName" class="form-control w-100" type="file">
+
 
             </div>
-         
+
         </div>
         <!-- routerLink="" -->
-        <button  id="modalAcceptBtn" class="btn"> Add </button>
+     <div id="btnsRow" class="row">
+       <div  class="row">
+        <button (click)="closeModal()"  id="modalCancelBtn"  class="btn btn-danger"> Cancel </button>
+        <button (click)="createClick($event)"  id="modalAcceptBtn"  class="btn btn-success"> Add </button>
+       </div>
+
+     </div>
+
 
     </div>
 </div>

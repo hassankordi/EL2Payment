@@ -6,8 +6,14 @@ import { IType } from '../shared/models/productType';
 import { map } from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
 import { IProduct } from '../shared/models/product';
-import { environment } from 'src/environments/environment';
+
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
+
+
+
+
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +23,7 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  addProduct(data, image): Observable<any> {
+  addProduct(data): Observable<any> {
     const product = {
       // id: Number(data.id),
       name: data.name,
@@ -26,13 +32,24 @@ export class ShopService {
       rating: Number(data.rating),
       availableQuantity: data.availableQuantity,
       limit: Number(data.limit),
-      pictureUrl: data.pictureUrl,
+     // pictureUrl: data.pictureUrl,
       productType: data.productType,
       productBrand: data.productBrand,
 
     }
-    return this.http.post(this.baseUrl + 'products', product)
+    return this.http.post(this.baseUrl + 'products/CreateProduct', product)
   }
+
+  // addBrand(data): Observable<any> {
+  //   const brand = {
+  //     // id: Number(data.id),
+  //     name: data.name,
+
+
+  //   }
+  //   return this.http.post(this.baseUrl + 'products/brands', brand)
+  // }
+
   getProducts(shopParams: ShopParams) {
     let params = new HttpParams();
     if (shopParams.brandId !== 0) {
@@ -68,8 +85,18 @@ export class ShopService {
   getProduct(id: number) {
     return this.http.get<IProduct>(this.baseUrl + 'products/' + id);
   }
-  postProduct(product: IProduct) {
-    return this.http.get<IProduct[]>(this.baseUrl + 'Products/CreateProduct/');
+  postProduct(product) {
+    return this.http.post(this.baseUrl+'Products/CreateProduct',product);
+  }
+  postbrand(brand){
+    return this.http.post(this.baseUrl+'Products/CreateProductBrand',brand);
+  }
+  postType(type){
+    return this.http.post(this.baseUrl+'Products/CreateProductType',type);
+  }
+
+  postdelevery(delevery){
+    return this.http.post(this.baseUrl+'Orders/DeliveryMethod',delevery);
   }
   // create(genre: genreCreationDto){
   //   return this.http.post(this.apiurl, genre);

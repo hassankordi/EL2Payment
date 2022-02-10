@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { environment } from 'src/environments/environment'; 
+import { environment } from 'src/environments/environment';
+
+
+
+
 
 
 @Component({
@@ -13,14 +17,14 @@ export class CreateProducTypeComponent implements OnInit {
 
 
   constructor(private http:HttpClient,) { }
-prodctType:any=[]; 
+prodctType:any=[];
 modalTitle="";
-Id=0; 
+Id=0;
 Name="";
 onChange(event) {}
 
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.refreshList();
   }
   refreshList(){
@@ -29,20 +33,20 @@ onChange(event) {}
     });
 }
 addClick(){
-  this.modalTitle="Add Type"; 
-  this.Id=0; 
-  this.Name=""; 
-} 
+  this.modalTitle="Add Type";
+  this.Id=0;
+  this.Name="";
+}
 editClick(typ:any ){
-  this.modalTitle="Edit Type"; 
-  this.Id=typ.Id; 
-  this.Name=typ.Name; 
+  this.modalTitle="Edit Type";
+  this.Id=typ.Id;
+  this.Name=typ.Name;
 }
 createClick(){
   var val={
   prodctType:this.prodctType
-  }; 
-  this.http.post(environment.baseUrl+'Products/CreateProductType',val) 
+  };
+  this.http.post(environment.baseUrl+'Products/CreateProductType',val)
   .subscribe(res=>{
     alert(res.toString());
     this.refreshList();
@@ -53,8 +57,8 @@ createClick(){
 //   var val={
 //   Name:this.Name,
 //   Id:this.Id
-//   }; 
-//   this.http.put(environment.baseUrl+'Products/CreateProductType',val) 
+//   };
+//   this.http.put(environment.baseUrl+'Products/CreateProductType',val)
 //   .subscribe(res=>{
 //     alert(res.toString());
 //     this.refreshList();

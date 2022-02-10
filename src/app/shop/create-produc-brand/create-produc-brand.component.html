@@ -4,7 +4,7 @@
     class="btn btn-primary m-2 float-end"
     data-bs-toggle="model"
     data-bs-target="#exampleModel"
-    (click)="addClick()">
+    (click)="openModal()">
     
     Add Type
     </button>
@@ -13,7 +13,7 @@
     <table class="table table-strip">
         <thead>
             <th>
-                ProductType Id
+                Brand Id
             </th> 
             <th>
                      Product Brand
@@ -28,8 +28,8 @@
                <td >{{pro.id}}</td>
                <td >{{pro.name}}</td> 
                 <td>
-                    <button type="button" class="btn btn-light mr-1">Edit</button> 
-                    <button type="button" class="btn btn-light mr-1">Delete</button> 
+                    <button type="button" (click)="openModal()"  class="btn btn-light mr-1">Add</button> 
+                   
                 </td>
     
            </tr>
@@ -37,8 +37,27 @@
     </table> 
     
     
+    </div> 
+
+
+    <div class="row">
+
+        <div class="col-8 mt-2">
+
+            <form action="post">
+                <label for="">name</label>
+                <input formControlName="name" type="text" class="form-control" name="" id="">
+
+                
+            </form>
+
+
+        </div>
+
     </div>
-    <div class="model fade" id="exampleModel" tabindes="-1" aria-label="exampleModalLabel" 
+    <!-- routerLink="" -->
+    <button id="modalAcceptBtn"(click)="setProducts($event)" class="btn"> Add </button>
+    <!-- <div class="model fade" id="exampleModel" tabindes="-1" aria-label="exampleModalLabel" 
     aria-hidden="true">
     <div class="model-dialog model-lg model-dialog-centered">
     <div class="model-content">
@@ -57,10 +76,10 @@
         Create
         </button>
     
-        <!-- <button type="button" (click)="updateClick()"
+         <button type="button" (click)="setProducts($event)"
             *ngIf="Id==0"class="btn btn-primary">
         Update
-        </button> -->
+        </button> 
         </div>
     </div>
     
@@ -68,4 +87,4 @@
     
     </div>
     
-    </div>
+    </div> -->

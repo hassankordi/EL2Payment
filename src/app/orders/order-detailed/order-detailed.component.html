@@ -5,8 +5,11 @@
             </app-basket-summary>
         </div>
         <div class="col-4">
-            <app-order-totals [orderDetail]="true" [shippingPrice]="order.shippingPrice" [subtotal]="order.subTotal"
+            <app-order-totals [orderDetail]="true" 
+            [shippingPrice]="order.shippingPrice"
+             [subtotal]="order.subTotal"
                 [total]="order.total">
+                
             </app-order-totals>
         </div>
     </div>

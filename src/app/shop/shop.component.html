@@ -1,20 +1,23 @@
-<div class="container mt-3">
+  <div class="container mt-3">
     <div class="row">
 
-        <section class="col-3">
+        <section class="col-sm-3">
             <ng-container *ngIf="types && brands">
                 <h5 class="text-warning ml-3 mt-3 mb-4">Sort</h5>
                 <select class="custom-select mb-4" (change)="onSortSelected($event.target.value)">
                     <option [value]="item.value" *ngFor=" let item of sortOptions">{{item.name}}</option>
                 </select>
 
-                <h5 class="text-warning ml-3">Brands</h5>
+                <h5 class="text-warning ml-3"><a><i class=""style="cursor: pointer" (click)='openModalBrand()'>Brands</i></a></h5>
                 <ul class="list-group my-3">
                     <li class="list-group-item" style="cursor: pointer;" *ngFor="let brand of brands"
                         [class.active]="brand.id===this.shopParams.brandId" [value]="brand.id"
+
                         (click)="onBrandSelected(brand.id)">{{brand.name}}</li>
+
                 </ul>
-                <h5 class="text-warning ml-3">Types</h5>
+                <h5 class="text-warning ml-3"><a><i class=""style="cursor: pointer" (click)='openModaltype()'>Types</i></a></h5>
+
                 <ul class="list-group my-3">
                     <li class="list-group-item" style="cursor: pointer;" *ngFor="let type of types"
                         [class.active]="type.id===this.shopParams.typeId" [value]="type.id"
@@ -23,7 +26,7 @@
             </ng-container>
         </section>
 
-        <section class="col-9">
+        <section class="col-sm-9">
             <div class="d-flex justify-content-between align-items-center pb-2">
                 <app-paging-header [pageNumber]="this.shopParams.pageNumber" [pageSize]="this.shopParams.pageSize"
                     [totalCount]="this.totalCount"></app-paging-header>
@@ -34,11 +37,13 @@
                     <button class="btn btn-outline-primary my-2" (click)='onSearch()'>Search</button>
                     <button class="btn btn-outline-success my-2 ml-2" (click)='onReset()'>Reset</button>
                     <button class="btn btn-outline-success my-2 ml-2" (click)='openModal()'>Add</button>
+                    <button class="btn btn-outline-success my-2 ml-2" (click)='opendeleverymethod()'>Adddelevery price</button>
+
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-4 mb-4" *ngFor="let item of products">
+                <div class="col-sm-4 mb-4" *ngFor="let item of products">
                     <app-product-item [product]=item></app-product-item>
                 </div>
             </div>
@@ -55,7 +60,7 @@
 
 
 
-<div id="myModal" class="myModal">
+<div id="myModal" class="myModal" *ngIf="closeDialog == true">
     <div class="modalBox">
         <!-- <i (click)="closeModal()" id="closeModal" class="fas fa-times"></i> -->
         <i (click)="closeModal()" id="closeModal" class="far fa-window-close"></i>
@@ -64,38 +69,56 @@
 
         <div class="row">
 
-            <div class="col-8 mt-2">
+            <div class="col-sm-8 mt-2">
 
                 <form [formGroup]="productData" action="">
                     <label for="">name</label>
-                    <input formControlName="name" type="text" class="form-control" name="" id="">
+                    <input formControlName="name" type="text" class="form-control"  id="" style="font-size: x-large;">
+                    <label for="">supplier</label>
+                    <input formControlName="supplier" type="text" class="form-control"  id="" style="font-size: x-large;">
 
                     <label for="">description</label>
-                    <input formControlName="description" type="text" class="form-control" name="" id="">
+                    <input formControlName="description" type="text" class="form-control"  id="">
 
 
-                    <label for="">price</label>
-                    <input formControlName="price" type="text" class="form-control" name="" id="">
+                     <label for="">price</label>
+                    <input formControlName="price" type="number" class="form-control"  id="">
 
 
-                    <label for="">rating</label>
-                    <input formControlName="rating" type="text" class="form-control" name="" id="">
+                    <!-- <label for="">rating</label>
+                    <input formControlName="rating" type="text" class="form-control"  id=""> -->
 
-                    <label for="">Available Quantity</label>
-                    <input formControlName="availableQuantity" type="text" class="form-control" name="" id="">
+                    <label for=""> Quantity</label>
+                    <input formControlName="availableQuantity" type="number" class="form-control"  id="">
 
-                    <label for=""> productType</label>
-                    <input formControlName="productType" type="text" class="form-control" name="" id="">
+
                     <label for=""> limit </label>
-                    <input formControlName="limit" type="text" class="form-control" name="" id="">
 
-                    <label for=""> productBrand </label>
-                    <input formControlName="productBrand" type="text" class="form-control" name="" id="">
+                 <input formControlName="limit" type="number" class="form-control"  id="">
 
+                  <div >
+                    <label for=""> product Type </label>
+                      <select class="custom-select mr-sm-2" id="id"  formControlName="productType">
+                        <option *ngFor="let type of  types; let i = index" [ngValue]="type">
+                            {{type.name}}
+                        </option>
+                      </select>
 
+                  </div>
+                   <!-- <input formControlName="productType" type="" class="form-control"  id="">  --> -->
+                   <div>
+                   <label for=""> product Brand </label>
 
-                    <label for="">image </label>
-                    <input (input)='onUpload($event)' name="photofileName" class="form-control w-100" type="file">
+                    <select class="custom-select mr-sm-2" id="id"  formControlName="productBrand">
+                        <option *ngFor="let brand of  brands; let i = index" [ngValue]="brand" >
+                            {{brand.name}}
+                        </option>
+                      </select>
+                </div>
+
+                    <!-- <label for="">image </label>
+                    <input (input)='onUpload($event)' name="photofileName" class="form-control w-100" type="file"> -->
+                    <button id="modalAcceptBtn"(click)="addProducts(productData.value)" class="btn"> Add </button>
                 </form>
 
 
@@ -103,7 +126,80 @@
 
         </div>
         <!-- routerLink="" -->
-        <button id="modalAcceptBtn" class="btn"> Add </button>
+
+
+    </div>
+</div>
+
+
+<div id="mybrand" class="myModal" *ngIf="closeDialog == true">
+    <div class="modalBox">
+        <i (click)="closeModalBrand()" id="closeModal" class="fas fa-times"></i>
+        <div class="row">
+
+            <div class="col-sm-8 mt-2">
+
+                <form [formGroup]="brandData" action="">
+                    <label for="">name</label>
+                    <input formControlName="name" #names type="text" class="form-control" name="" placeholder="brand Name" id="" style="font-size: x-large;" >
+
+                    <button id="modalAcceptBtn"(click)="addBrad(names.value)" class="btn"> Add </button>
+                </form>
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+<div id="myType" class="myModal"  *ngIf="closeDialog == true">
+    <div class="modalBox" >
+        <i (click)="closeModaltype()" id="closeModal" class="fas fa-times"></i>
+       <div class="row">
+
+            <div class="col-sm-8 mt-2">
+
+                <form [formGroup]="brandData" action="">
+                    <label for="">name</label>
+                    <input formControlName="name" #prod type="text" class="form-control" name="" placeholder="type Name" id="" style="font-size: x-large;" >
+
+                    <button id="modalAcceptBtn"(click)="addType(prod.value)" class="btn" > Addd </button>
+                </form>
+
+
+            </div>
+
+        </div>
+        <!-- routerLink="" -->
+
+
+    </div>
+</div>
+<div id="delevery" class="myModal" *ngIf="closeDialog == true">
+    <div class="modalBox">
+        <i (click)="closedeleverymethod()" id="closeModal" class="fas fa-times"></i>
+        <div class="row">
+
+            <div class="col-sm-8 mt-2">
+
+                <form [formGroup]="deleverybrtand" action="">
+                    <label for="">delevery description </label>
+                    <input formControlName="shortName" #names type="text" class="form-control"   placeholder="delevery " id="" style="font-size: x-large;" >
+                    <label for="">price</label>
+                    <input formControlName="price" #names type="number" class="form-control"  placeholder="delevery Price" id="" style="font-size: x-large;" >
+
+                    <button id="modalAcceptBtn"(click)="adddelevery(deleverybrtand.value)" class="btn"> Add </button>
+                </form>
+
+
+            </div>
+
+        </div>
+
+
 
     </div>
 </div>

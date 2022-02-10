@@ -9,4 +9,5 @@ export interface IProduct {
   pictureUrl: string;
   productType: string;
   productBrand: string;
+  supplier:string;
 }

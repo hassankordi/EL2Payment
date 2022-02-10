@@ -1,0 +1,87 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-hover" style="cursor: pointer;">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Buyer Email</th>
+                        <th>Product Name</th>
+
+
+                        <th>Suplier</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Bill</th>
+
+                        <th>Action</th>
+
+
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- routerLink="/orders/{{order.id}}" -->
+                    <tr *ngFor="let order of orders" >
+                        <th>  {{order.buyerEmail}}</th>
+                        <td>{{order.orderItems[0].itemOrdered.productName}}</td>
+                        <td>{{order.orderItems[0].itemOrdered.supplier}}</td>
+                        <td>{{order.orderItems[0].itemOrdered.description}}</td>
+                        <td>{{order.orderDate | date: 'medium'}}</td>
+                        <td>{{order.subTotal | currency}}</td>
+                        <td>
+
+                          <!-- <img [src]="order.orderItems[0].itemOrdered.pictureUrl" alt=""> -->
+                          <button mat-flat-button class="btn btn-outline-primary"  color="" (click)="openModal(order)" >
+                            Show bill
+                       </button>
+                        </td>
+
+
+                         <td>
+                          <button mat-flat-button class="btn btn-outline-success"  >
+                             Accept
+                        </button>
+                        <button mat-flat-button class="btn btn-outline-danger"   >
+                          Reject
+                     </button>
+
+                         </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="myModal" *ngIf="closeDialog == true">
+  <div class="modalBox">
+      <!-- <i (click)="closeModal()" id="closeModal" class="fas fa-times"></i> -->
+      <!-- <i  id="closeModal" class="far fa-window-close"></i> -->
+      <!-- <i class=""></i> -->
+
+
+      <!-- <div class="row align-content-center"> -->
+
+
+          <div class="col-12 mt-2" >
+             <img src="data:image/png;base64,{{selectedBill.pictureUrl}}" class="img-fluid" id="img"/>
+
+
+          <!-- </div> -->
+
+      </div>
+      <!-- routerLink="" -->
+   <div id="btnsRow" class="row">
+     <div  class="row">
+      <button (click)="closeModal()"  id="modalCancelBtn"  class="btn btn-danger"> Cancel </button>
+      <!-- <button (click)="createClick($event)"  id="modalAcceptBtn"  class="btn btn-success"> Add </button> -->
+     </div>
+
+   </div>
+
+
+  </div>
+</div>

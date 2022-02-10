@@ -4,7 +4,11 @@
     <nav class="my-2 my-md-0 mr-md-3 text-uppercase" style="font-size: larger;">
         <a class="p-2" routerLink='/' routerLinkActive='active' [routerLinkActiveOptions]='{exact:true}'>Home</a>
         <a class="p-2" routerLink='/shop' routerLinkActive='active'>Shop</a>
-        <a class="p-2" href="#">Contact</a>
+        <a class="p-2" routerLink='/allorders' routerLinkActive='active'>All Orders</a>
+        <a class="p-2" routerLink='/finance' routerLinkActive='active'>Finance</a>
+       <a class="p-2" routerLink='/comOrder' routerLinkActive='active'>Stock</a> 
+       <a class="p-2" routerLink='/Inventory' routerLinkActive='active'>Inventory</a> 
+        <!-- <a class="p-2" href="#">Contact</a> -->
     </nav>
     <div class="d-flex align-items-center">
         <a routerLink="/basket" class="position-relative">
@@ -20,12 +24,13 @@
                 <a style="cursor: pointer;" class="dropdown-toggle" dropdownToggle>
                     <strong>Welcome {{currentUser.displayName}}</strong></a>
                 <div class="dropdown-menu dropdown-menu-right" style="cursor: pointer;" *dropdownMenu>
-                    <a routerLink='/basket' href="" class="dropdown-item align-items-center d-flex py-2">
+                     <a routerLink='/basket' href="" class="dropdown-item align-items-center d-flex py-2">
                         <i class="fa fa-shopping-cart mr-3"></i> View Basket
                     </a>
                     <a routerLink='/orders' href="" class="dropdown-item align-items-center d-flex py-2">
                         <i class="fa fa-history mr-3"></i> View Orders
                     </a>
+
                     <div class="dropdown-divider"></div>
                     <a (click)='logout()' href="" class="dropdown-item align-items-center d-flex py-2">
                         <i class="fa fa-sign-out mr-3"></i> Logout
